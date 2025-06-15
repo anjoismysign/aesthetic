@@ -1,4 +1,4 @@
-package me.anjoismysign.aesthetic;
+package io.github.anjoismysign.aesthetic;
 
 import java.io.File;
 import java.net.URL;

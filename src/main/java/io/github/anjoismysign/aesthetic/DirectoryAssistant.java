@@ -36,7 +36,7 @@ public interface DirectoryAssistant extends FileDecorator {
         };
     }
 
-    File file();
+    @NotNull File file();
 
     default File[] listDirectories() {
         return file().listFiles(File::isDirectory);

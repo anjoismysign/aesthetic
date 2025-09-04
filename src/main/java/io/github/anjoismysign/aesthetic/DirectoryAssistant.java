@@ -58,13 +58,23 @@ public interface DirectoryAssistant extends FileDecorator {
         return result;
     }
 
-    private void listRecursivelyHelper(@NotNull File dir, List<File> result, String[] extensions) {
+    default Collection<File> listAllRecursively() {
+        List<File> result = new ArrayList<>();
+        listRecursivelyHelper(file(), result, null);
+        return result;
+    }
+
+    private void listRecursivelyHelper(@NotNull File dir, List<File> result, @Nullable String[] extensions) {
         File[] files = dir.listFiles();
         if (files != null)
             for (File file : files) {
                 if (file.isDirectory()) {
                     listRecursivelyHelper(file, result, extensions);
                 } else {
+                    if (extensions == null){
+                        result.add(file);
+                        continue;
+                    }
                     for (String extension : extensions) {
                         if (file.getName().endsWith(extension)) {
                             result.add(file);
